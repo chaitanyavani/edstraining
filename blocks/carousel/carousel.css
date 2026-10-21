@@ -1,0 +1,90 @@
+.carousel {
+  position: relative;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f5f5f5;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-slide > * {
+  display: block;
+  width: 100%;
+}
+
+.carousel-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.carousel-button {
+  border: 0;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-button:hover {
+  transform: translateY(-1px);
+}
+
+.carousel-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: #c7d2fe;
+  padding: 0;
+  cursor: pointer;
+}
+
+.carousel-dot.is-active {
+  background: #1d4ed8;
+}
+
+@media (width >= 768px) {
+  .carousel {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
