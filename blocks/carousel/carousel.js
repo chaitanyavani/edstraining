@@ -99,28 +99,6 @@ function bindEvents(block) {
   block.querySelectorAll('.carousel-slide').forEach((slide) => {
     slideObserver.observe(slide);
   });
-
-  let autoplayTimer = null;
-
-  const startAutoplay = () => {
-    if (block.dataset.autoplay === 'false' || block.querySelectorAll('.carousel-slide').length < 2) return;
-    window.clearInterval(autoplayTimer);
-    autoplayTimer = window.setInterval(() => {
-      const currentIndex = Number.parseInt(block.dataset.activeSlide || '0', 10);
-      showSlide(block, currentIndex + 1);
-    }, 5000);
-  };
-
-  const stopAutoplay = () => {
-    window.clearInterval(autoplayTimer);
-  };
-
-  block.addEventListener('mouseenter', stopAutoplay, true);
-  block.addEventListener('mouseleave', startAutoplay, true);
-  block.addEventListener('focusin', stopAutoplay, true);
-  block.addEventListener('focusout', startAutoplay, true);
-
-  startAutoplay();
 }
 
 function createSlide(row, slideIndex, carouselId) {
