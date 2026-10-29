@@ -1,7 +1,19 @@
+.carousel {
+  --carousel-overlay-dark: rgba(0, 0, 0, 0.82);
+  --carousel-overlay-mid: rgba(0, 0, 0, 0.52);
+  --carousel-overlay-light: rgba(0, 0, 0, 0.08);
+  --carousel-text: #fff;
+  --carousel-muted: rgba(255 255 255 / 82%);
+  --carousel-button-bg: rgba(255 255 255 / 12%);
+  --carousel-button-border: rgba(255 255 255 / 22%);
+  --carousel-dot: rgba(255 255 255 / 34%);
+  --carousel-dot-active: #fff;
+}
+
 .carousel .carousel-slides-container {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, rgb(0 0 0 / 90%) 0%, rgb(0 0 0 / 76%) 38%, rgb(0 0 0 / 20%) 60%, rgb(0 0 0 / 0%) 100%);
+  background: linear-gradient(90deg, rgb(0 0 0 / 90%) 0%, rgb(0 0 0 / 74%) 37%, rgb(0 0 0 / 18%) 57%, rgb(0 0 0 / 0%) 100%);
   isolation: isolate;
 }
 
@@ -14,9 +26,13 @@
 
 .carousel .carousel-slides {
   display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  overflow: scroll clip;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .carousel .carousel-slides::-webkit-scrollbar {
@@ -30,9 +46,10 @@
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  min-height: min(50vw, calc(100dvh - var(--header-height)));
+  min-height: min(56vw, calc(100dvh - var(--header-height, 0px)));
   scroll-snap-align: start;
   overflow: hidden;
+  background: #0b0d12;
 }
 
 .carousel .carousel-slide:has(.carousel-slide-content[data-align='center']) {
@@ -45,16 +62,17 @@
 
 .carousel .carousel-slide .carousel-slide-image {
   position: absolute;
-  inset: 0 0 0 36%;
-  width: 64%;
+  inset: 0 0 0 34%;
+  width: 66%;
+  overflow: hidden;
 }
 
 .carousel .carousel-slide .carousel-slide-image::before {
   position: absolute;
   inset: 0;
-  content: '';
-  background: linear-gradient(90deg, rgb(0 0 0 / 75%) 0%, rgb(0 0 0 / 45%) 18%, rgb(0 0 0 / 5%) 42%, rgb(0 0 0 / 0%) 100%);
   z-index: 1;
+  content: '';
+  background: linear-gradient(90deg, rgb(0 0 0 / 78%) 0%, rgb(0 0 0 / 52%) 20%, rgb(0 0 0 / 12%) 42%, rgb(0 0 0 / 0%) 100%);
 }
 
 .carousel .carousel-slide .carousel-slide-image picture {
@@ -67,7 +85,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.8) saturate(0.75);
+  filter: brightness(0.82) saturate(0.78);
   transform: scale(1.08);
 }
 
@@ -78,12 +96,12 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: var(--slide-content-width, min(640px, 46vw));
+  width: min(640px, 46vw);
   max-width: 100%;
   margin: clamp(56px, 8vw, 120px) 0 clamp(56px, 8vw, 120px) clamp(18px, 5vw, 72px);
   padding: 0;
   background: transparent;
-  color: white;
+  color: var(--carousel-text);
 }
 
 .carousel .carousel-slide .carousel-slide-content > * {
@@ -97,23 +115,23 @@
 .carousel .carousel-slide .carousel-slide-content h5,
 .carousel .carousel-slide .carousel-slide-content h6 {
   margin: 0;
-  color: #fff;
+  color: var(--carousel-text);
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.06em;
   line-height: 0.96;
-  text-shadow: 0 10px 24px rgb(0 0 0 / 18%);
+  text-shadow: 0 12px 28px rgb(0 0 0 / 15%);
 }
 
 .carousel .carousel-slide .carousel-slide-content h1,
 .carousel .carousel-slide .carousel-slide-content h2 {
-  font-size: clamp(2.6rem, 4vw, 5.1rem);
   max-width: 540px;
+  font-size: clamp(2.6rem, 4vw, 5.2rem);
 }
 
 .carousel .carousel-slide .carousel-slide-content p {
   margin: 1.6rem 0 0;
   max-width: 760px;
-  color: rgb(255 255 255 / 82%);
+  color: var(--carousel-muted);
   font-size: clamp(1.05rem, 1.2vw, 1.55rem);
   line-height: 1.55;
 }
@@ -138,13 +156,13 @@
   padding: 0 1.35rem;
   border-radius: 14px;
   background: linear-gradient(180deg, #0f6fe9 0%, #0a58c0 100%);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 16%);
   color: #fff;
   font-weight: 700;
   font-size: 1.08rem;
   line-height: 1;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .carousel .carousel-slide .carousel-slide-content .button-container a:hover,
@@ -160,8 +178,8 @@
 }
 
 .carousel .carousel-slide .carousel-slide-content ul a {
-  min-width: 0;
   width: 46px;
+  min-width: 0;
   height: 46px;
   min-height: 0;
   padding: 0;
@@ -175,25 +193,32 @@
   justify-content: center;
   gap: 6px 12px;
   padding: 12px;
-  background-color: var(--light-color);
+  background-color: var(--light-color, #f5f5f5);
   line-height: 0;
 }
 
 .carousel .carousel-slide-indicator button {
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background-color: #8F8F8F;
-  transition: background-color 0.2s ease;
+  background-color: var(--carousel-dot);
+  box-shadow: none;
+  opacity: 0.72;
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 .carousel .carousel-slide-indicator button:disabled,
 .carousel .carousel-slide-indicator button:hover,
 .carousel .carousel-slide-indicator button:focus-visible {
-  background-color: var(--text-color);
+  background-color: var(--carousel-dot-active);
+  opacity: 1;
+}
+
+.carousel .carousel-slide-indicator button:disabled {
+  transform: scale(1.2);
 }
 
 .carousel .carousel-navigation-buttons {
@@ -217,17 +242,18 @@
   height: 54px;
   margin: 0;
   padding: 0;
-  border: 1px solid rgb(255 255 255 / 20%);
+  border: 1px solid var(--carousel-button-border);
   border-radius: 50%;
-  background: rgb(255 255 255 / 14%);
+  background: var(--carousel-button-bg);
   box-shadow: 0 12px 28px rgb(0 0 0 / 18%);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .carousel .carousel-navigation-buttons button:hover,
 .carousel .carousel-navigation-buttons button:focus-visible {
   background: rgb(255 255 255 / 18%);
-  border-color: rgb(255 255 255 / 40%);
+  border-color: rgb(255 255 255 / 38%);
+  transform: translateY(-1px);
 }
 
 .carousel .carousel-navigation-buttons button::after {
